@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Друна</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Ruslan+Display&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Caveat', cursive;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        #app {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease-in-out;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .page.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .envelope-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #ff6b6b;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .envelope-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #ff8787;
+            z-index: 2;
+        }
+
+        .inside-img {
+            width: 80px;
+            height: 80px;
+            z-index: 3;
+            object-fit: contain;
+            background: white;
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .drun-text {
+            font-family: 'Ruslan Display', cursive;
+            font-size: 24px;
+            margin-top: 10px;
+            color: #d63031;
+        }
+
+        .kap-text {
+            margin-top: 20px;
+            font-size: 22px;
+            animation: bounce 2s infinite;
+        }
+
+        img.gif-style {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 45px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            margin: 15px 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 10px;
+            color: #d63031;
+        }
+
+        p {
+            font-size: 24px;
+            margin: 10px;
+        }
+
+        .btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Caveat', cursive;
+            transition: transform 0.2s, background 0.3s;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+            background-color: #ff4757;
+        }
+
+        .btn-secondary {
+            background-color: #747d8c;
+        }
+        .btn-secondary:hover {
+            background-color: #57606f;
+        }
+
+        .floating-gif {
+            position: fixed;
+            bottom: -150px;
+            left: 0;
+            z-index: 1;
+            opacity: 0;
+            pointer-events: none;
+            object-fit: contain;
+            animation-name: floatUp;
+            animation-timing-function: linear;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div id="page1" class="page active">
+        <div class="envelope-container">
+            <img src="assets/first.gif" class="inside-img" style="display:flex; justify-content:center; align-items:center; font-size:40px;">
+        </div>
+        <div class="drun-text">для друна</div>
+        <div class="kap-text">Кап кап кап, кто-то тебе написал?<br>Кап кап кап</div>
+        <button class="btn" onclick="goTo('page2')">Далее -></button>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>О май гад</h1>
+        <h1>Ду ю вонт ту опен ит?</h1>
+        <img src="assets/sticker2.gif" alt="Gif" class="gif-style">
+        <div>
+            <button class="btn" onclick="goTo('page4')">Открыть</button>
+            <button class="btn btn-secondary" onclick="goTo('page3')">Нiт</button>
+        </div>
+    </div>
+
+    <div id="page3" class="page">
+        <img src="assets/sticker4_transparent.gif" style="padding: 0 0 20px 0; max-width: 200px;">
+        <p>Но но но мистер фиш,<br>ю донт деклайн итс май письмо</p>
+        <button class="btn" onclick="goTo('page2')">Еще раз</button>
+    </div>
+
+    <div id="page4" class="page">
+        <img src="assets/sticker6_transparent.gif" style="padding: 0 0 20px 0; max-width: 150px;">
+        <h1 style="font-size: 40px; line-height: 1.2;">С Днiм Святого Чикатила!<br><span style="font-size: 20px; color: #555;">Ой, Валентина</span></h1>
+        
+        <img src="assets/sticker5.gif" alt="Good Gif" class="gif-style">
+        
+        <p>мега хорош, тапай на кнопопчку</p>
+        <button class="btn" onclick="goTo('page5')">Next</button>
+    </div>
+
+    <div id="page5" class="page">
+        <h1>Лан, с Днём Святого Валентина, Друн</h1>
+        <img src="assets/sticker7.gif" style="padding: 20px 0 20px 0; max-width: 300px;">
+        <p>Счастья, радости, интима,<br>с Днём Святого Валентина!</p>
+    </div>
+
+</div>
+
+<script>
+    function goTo(pageId) {
+        const activePage = document.querySelector('.page.active');
+        const nextPage = document.getElementById(pageId);
+        if (activePage) activePage.classList.remove('active');
+        if (nextPage) setTimeout(() => nextPage.classList.add('active'), 300);
+    }
+
+    function createFloatingGifs() {
+        const userGifs = [
+            'assets/1_transparent.gif', 
+            'assets/sticker.gif',
+            'assets/2_transparent.gif',
+            'assets/3.png',
+            'assets/4.png'
+        ];
+
+        const container = document.body;
+
+        setInterval(() => {
+            const el = document.createElement('img');
+            el.classList.add('floating-gif');
+            
+            el.src = userGifs[Math.floor(Math.random() * userGifs.length)];
+            
+            el.style.left = (Math.random() * 90) + '%';
+            
+            el.style.animationDuration = (Math.random() * 5 + 5) + 's'; 
+            
+            const size = Math.random() * 50 + 40; 
+            el.style.width = size + 'px';
+            
+            container.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, 10000); 
+        }, 200); 
+    }
+
+    createFloatingGifs();
+</script>
+
+
+</body>
+</html>
